@@ -7,7 +7,6 @@ package com.apu.TcpServerForAccessControlDB.repository;
 
 import com.apu.TcpServerForAccessControlDB.entity.AccessMessage;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  *
