@@ -21,5 +21,7 @@ import org.springframework.data.repository.query.Param;
 public interface RuleRepository extends CrudRepository<Rule, Integer>{
     
     List<Rule> findByDeviceIdAndCardId(@Param("deviceId") Device deviceId, @Param("cardId") Card cardId);
-    
+    Integer findByCardDeviceEvent(@Param("cardNumber") String cardNumber,
+            @Param("deviceNumber") Integer deviceNumber,
+            @Param("eventId") Integer eventId);
 }

@@ -38,7 +38,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Rule.findByRuleId", query = "SELECT r FROM Rule r WHERE r.ruleId = :ruleId")
     , @NamedQuery(name = "Rule.findByDeviceIdAndCardId", query = "SELECT r FROM Rule r WHERE r.deviceId = :deviceId AND r.cardId = :cardId")
     , @NamedQuery(name = "Rule.findByDateBegin", query = "SELECT r FROM Rule r WHERE r.dateBegin = :dateBegin")
-    , @NamedQuery(name = "Rule.findByDateEnd", query = "SELECT r FROM Rule r WHERE r.dateEnd = :dateEnd")})
+    , @NamedQuery(name = "Rule.findByDateEnd", query = "SELECT r FROM Rule r WHERE r.dateEnd = :dateEnd")
+    , @NamedQuery(name = "Rule.findByCardDeviceEvent", query = "SELECT count(r.ruleId) "
+            + " FROM Rule r, Card c, Device d, EventType e WHERE r.cardId=c.cardId AND r.deviceId=d.deviceId AND r.eventId=e.eventId" 
+            + " AND d.deviceNumber=:deviceNumber AND e.eventId=:eventId AND c.cardNumber LIKE :cardNumber")})
 public class Rule implements Serializable {
 
     private static final long serialVersionUID = 1L;
