@@ -9,6 +9,8 @@ import com.apu.TcpServerForAccessControlDB.entity.EventType;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -18,7 +20,12 @@ import org.springframework.data.repository.query.Param;
  */
 public interface EventTypeRepository extends CrudRepository<EventType, Integer>{
     
+    @Cacheable("eventtype")
+//    @CacheEvict(value="eventtype", allEntries=true)
     List<EventType> findByEventId(@Param("eventId") Integer eventId);
+    
+    @Cacheable("eventtype")
+//    @CacheEvict(value="eventtype", allEntries=true)
     List<EventType> findByDescription(@Param("description") String description);
     
 }

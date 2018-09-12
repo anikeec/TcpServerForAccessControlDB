@@ -9,6 +9,8 @@ import com.apu.TcpServerForAccessControlDB.entity.Device;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -18,6 +20,8 @@ import org.springframework.data.repository.query.Param;
  */
 public interface DeviceRepository extends CrudRepository<Device, Integer>{
     
+    @Cacheable("device")
+//    @CacheEvict(value="device", allEntries=true)
     public List<Device> findByDeviceNumber(@Param("deviceNumber") Integer deviceNumber);
     
 }

@@ -11,6 +11,8 @@ import com.apu.TcpServerForAccessControlDB.entity.Rule;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -20,7 +22,10 @@ import org.springframework.data.repository.query.Param;
  */
 public interface RuleRepository extends CrudRepository<Rule, Integer>{
     
+    @Cacheable("rule")
+//    @CacheEvict(value="rule", allEntries=true)
     List<Rule> findByDeviceIdAndCardId(@Param("deviceId") Device deviceId, @Param("cardId") Card cardId);
+    
     Integer findByCardDeviceEvent(@Param("cardNumber") String cardNumber,
             @Param("deviceNumber") Integer deviceNumber,
             @Param("eventId") Integer eventId);

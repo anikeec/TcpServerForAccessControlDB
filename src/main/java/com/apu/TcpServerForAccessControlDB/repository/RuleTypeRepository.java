@@ -9,6 +9,8 @@ import com.apu.TcpServerForAccessControlDB.entity.RuleType;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -18,6 +20,8 @@ import org.springframework.data.repository.query.Param;
  */
 public interface RuleTypeRepository extends CrudRepository<RuleType, Integer>{
     
+    @Cacheable("ruletype")
+    @CacheEvict(value="ruletype", allEntries=true)
     List<RuleType> findByRuleTypeId(@Param("ruleTypeId") Integer ruleTypeId);
     
 }

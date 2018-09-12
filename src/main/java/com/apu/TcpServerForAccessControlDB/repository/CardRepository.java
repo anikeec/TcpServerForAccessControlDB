@@ -9,6 +9,8 @@ import com.apu.TcpServerForAccessControlDB.entity.Card;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -18,6 +20,8 @@ import org.springframework.data.repository.query.Param;
  */
 public interface CardRepository extends CrudRepository<Card, Integer>{
     
+    @Cacheable("card")
+//    @CacheEvict(value="card", allEntries=true)
     public List<Card> findByCardNumber(@Param("cardNumber") String cardNumber);
     
 }
