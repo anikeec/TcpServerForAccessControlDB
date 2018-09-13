@@ -24,4 +24,6 @@ public interface DeviceRepository extends CrudRepository<Device, Integer>{
 //    @CacheEvict(value="device", allEntries=true)
     public List<Device> findByDeviceNumber(@Param("deviceNumber") Integer deviceNumber);
     
+    public List<Device> findAll();
+    
 }

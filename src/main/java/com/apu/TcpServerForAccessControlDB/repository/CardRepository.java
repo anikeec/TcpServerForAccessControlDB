@@ -24,4 +24,6 @@ public interface CardRepository extends CrudRepository<Card, Integer>{
 //    @CacheEvict(value="card", allEntries=true)
     public List<Card> findByCardNumber(@Param("cardNumber") String cardNumber);
     
+    public List<Card> findAll();
+    
 }

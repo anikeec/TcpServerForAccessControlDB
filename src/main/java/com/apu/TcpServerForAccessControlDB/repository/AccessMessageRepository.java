@@ -10,6 +10,7 @@ import com.apu.TcpServerForAccessControlDB.entity.Card;
 import com.apu.TcpServerForAccessControlDB.entity.Device;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -39,5 +40,7 @@ public interface AccessMessageRepository extends CrudRepository<AccessMessage, I
             @Param("eventId") Integer eventId,
             @Param("description") String description,
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") @Param("date") Date date);
+    
+    public List<AccessMessage> findAll();
     
 }
