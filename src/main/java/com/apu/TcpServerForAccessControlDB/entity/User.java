@@ -60,6 +60,8 @@ public class User implements Serializable {
 //    @Size(max = 255)
     @Column(name = "email", length = 255)
     private String email;
+    @Column(name = "password", length = 255)
+    private String password;
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private Collection<Card> cardCollection;
 
@@ -108,6 +110,14 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @XmlTransient
