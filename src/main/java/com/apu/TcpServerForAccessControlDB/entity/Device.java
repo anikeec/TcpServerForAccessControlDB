@@ -44,9 +44,9 @@ public class Device implements Serializable {
     @Column(name = "device_number")
     private Integer deviceNumber;
     @Column(name = "last_packet_id")
-    private Integer lastPacketId;
+    private Integer lastPacketId = 0;
     @Column(name = "active")
-    private Boolean active;
+    private Boolean active = false;
     @OneToMany(mappedBy = "deviceId", fetch = FetchType.LAZY)
     private Collection<AccessMessage> accessMessageCollection;
     @OneToMany(mappedBy = "deviceId", fetch = FetchType.LAZY)

@@ -63,7 +63,7 @@ public class User implements Serializable {
     @Column(name = "password", length = 255)
     private String password;
     @Column(name = "active")
-    private Boolean active;
+    private Boolean active = false;
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private Collection<Card> cardCollection;
 

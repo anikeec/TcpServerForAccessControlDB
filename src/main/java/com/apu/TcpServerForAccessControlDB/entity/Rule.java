@@ -57,7 +57,7 @@ public class Rule implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnd;
     @Column(name = "active")
-    private Boolean active;
+    private Boolean active = false;
     @JoinColumn(name = "card_id", referencedColumnName = "card_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Card cardId;

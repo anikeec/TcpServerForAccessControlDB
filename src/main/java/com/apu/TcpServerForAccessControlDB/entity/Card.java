@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Card.findAll", query = "SELECT c FROM Card c")
     , @NamedQuery(name = "Card.findByCardId", query = "SELECT c FROM Card c WHERE c.cardId = :cardId")
-    , @NamedQuery(name = "Card.findByCardNumber", query = "SELECT c FROM Card c WHERE c.cardNumber = :cardNumber")})
+    , @NamedQuery(name = "Card.findByCardNumber", query = "SELECT c FROM Card c WHERE c.cardNumber = :cardNumber")
+    , @NamedQuery(name = "Card.findByActive", query = "SELECT c FROM Card c WHERE c.active = :active")})
 public class Card implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,7 +48,7 @@ public class Card implements Serializable {
     @Column(name = "card_number", length = 255)
     private String cardNumber;
     @Column(name = "active")
-    private Boolean active;
+    private Boolean active = false;
     @OneToMany(mappedBy = "cardId", fetch = FetchType.LAZY)
     private Collection<AccessMessage> accessMessageCollection;
     @OneToMany(mappedBy = "cardId", fetch = FetchType.LAZY)
