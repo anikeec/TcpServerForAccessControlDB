@@ -46,6 +46,8 @@ public class Card implements Serializable {
 //    @Size(max = 255)
     @Column(name = "card_number", length = 255)
     private String cardNumber;
+    @Column(name = "active")
+    private Boolean active;
     @OneToMany(mappedBy = "cardId", fetch = FetchType.LAZY)
     private Collection<AccessMessage> accessMessageCollection;
     @OneToMany(mappedBy = "cardId", fetch = FetchType.LAZY)
@@ -93,6 +95,14 @@ public class Card implements Serializable {
 
     public void setRuleCollection(Collection<Rule> ruleCollection) {
         this.ruleCollection = ruleCollection;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public User getUserId() {

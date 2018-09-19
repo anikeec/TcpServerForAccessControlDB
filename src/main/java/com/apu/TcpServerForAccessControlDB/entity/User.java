@@ -62,6 +62,8 @@ public class User implements Serializable {
     private String email;
     @Column(name = "password", length = 255)
     private String password;
+    @Column(name = "active")
+    private Boolean active;
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private Collection<Card> cardCollection;
 
@@ -118,6 +120,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @XmlTransient

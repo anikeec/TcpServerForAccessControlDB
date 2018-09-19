@@ -45,6 +45,8 @@ public class Device implements Serializable {
     private Integer deviceNumber;
     @Column(name = "last_packet_id")
     private Integer lastPacketId;
+    @Column(name = "active")
+    private Boolean active;
     @OneToMany(mappedBy = "deviceId", fetch = FetchType.LAZY)
     private Collection<AccessMessage> accessMessageCollection;
     @OneToMany(mappedBy = "deviceId", fetch = FetchType.LAZY)
@@ -83,6 +85,14 @@ public class Device implements Serializable {
 
     public void setLastPacketId(Integer lastPacketId) {
         this.lastPacketId = lastPacketId;
+    }
+    
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @XmlTransient
