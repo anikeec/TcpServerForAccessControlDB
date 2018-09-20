@@ -23,5 +23,7 @@ public interface RuleTypeRepository extends CrudRepository<RuleType, Integer>{
     @Cacheable("ruletype")
     @CacheEvict(value="ruletype", allEntries=true)
     List<RuleType> findByRuleTypeId(@Param("ruleTypeId") Integer ruleTypeId);
+    List<RuleType> findByDescription(@Param("description") String description);
+    List<RuleType> findAll();
     
 }

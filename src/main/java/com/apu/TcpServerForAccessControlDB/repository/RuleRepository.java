@@ -7,7 +7,9 @@ package com.apu.TcpServerForAccessControlDB.repository;
 
 import com.apu.TcpServerForAccessControlDB.entity.Card;
 import com.apu.TcpServerForAccessControlDB.entity.Device;
+import com.apu.TcpServerForAccessControlDB.entity.EventType;
 import com.apu.TcpServerForAccessControlDB.entity.Rule;
+import com.apu.TcpServerForAccessControlDB.entity.RuleType;
 
 import java.util.List;
 
@@ -29,4 +31,11 @@ public interface RuleRepository extends CrudRepository<Rule, Integer>{
     Integer findByCardDeviceEvent(@Param("cardNumber") String cardNumber,
             @Param("deviceNumber") Integer deviceNumber,
             @Param("eventId") Integer eventId);
+    List<Rule> findAll();
+    List<Rule> findByRuleId(@Param("ruleId") Integer ruleId);
+    List<Rule> findByDeviceIdCardIdEventTypeIdRuleTypeId(@Param("deviceId") Device deviceId,
+                                                        @Param("cardId") Card cardId,
+                                                        @Param("eventId") EventType eventTypeId,
+                                                        @Param("ruleTypeId") RuleType ruleTypeId);    
+    List<Rule> findByActive(@Param("active") Boolean active);
 }

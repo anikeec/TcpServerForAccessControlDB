@@ -27,5 +27,5 @@ public interface EventTypeRepository extends CrudRepository<EventType, Integer>{
     @Cacheable("eventtype")
 //    @CacheEvict(value="eventtype", allEntries=true)
     List<EventType> findByDescription(@Param("description") String description);
-    
+    List<EventType> findAll();
 }

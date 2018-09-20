@@ -26,6 +26,8 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  *
  * @author apu
@@ -37,11 +39,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Rule.findAll", query = "SELECT r FROM Rule r")
     , @NamedQuery(name = "Rule.findByRuleId", query = "SELECT r FROM Rule r WHERE r.ruleId = :ruleId")
     , @NamedQuery(name = "Rule.findByDeviceIdAndCardId", query = "SELECT r FROM Rule r WHERE r.deviceId = :deviceId AND r.cardId = :cardId")
+    , @NamedQuery(name = "Rule.findByDeviceIdCardIdEventTypeIdRuleTypeId", 
+        query = "SELECT r FROM Rule r WHERE r.deviceId = :deviceId AND r.cardId = :cardId AND r.eventId = :eventId AND r.ruleTypeId = :ruleTypeId")
     , @NamedQuery(name = "Rule.findByDateBegin", query = "SELECT r FROM Rule r WHERE r.dateBegin = :dateBegin")
     , @NamedQuery(name = "Rule.findByDateEnd", query = "SELECT r FROM Rule r WHERE r.dateEnd = :dateEnd")
     , @NamedQuery(name = "Rule.findByCardDeviceEvent", query = "SELECT count(r.ruleId) "
             + " FROM Rule r, Card c, Device d, EventType e WHERE r.cardId=c.cardId AND r.deviceId=d.deviceId AND r.eventId=e.eventId" 
-            + " AND d.deviceNumber=:deviceNumber AND e.eventId=:eventId AND c.cardNumber LIKE :cardNumber")})
+            + " AND d.deviceNumber=:deviceNumber AND e.eventId=:eventId AND c.cardNumber LIKE :cardNumber")
+    , @NamedQuery(name = "Rule.findByActive", query = "SELECT r FROM Rule r WHERE r.active = :active")})
 public class Rule implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,9 +57,11 @@ public class Rule implements Serializable {
     private Integer ruleId;
     @Column(name = "date_begin")
     @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date dateBegin;
     @Column(name = "date_end")
     @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date dateEnd;
     @Column(name = "active")
     private Boolean active = false;
