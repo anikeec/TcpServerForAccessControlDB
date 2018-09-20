@@ -21,10 +21,16 @@ import org.springframework.data.repository.query.Param;
 public interface DeviceRepository extends CrudRepository<Device, Integer>{
     
     @Cacheable("device")
-//    @CacheEvict(value="device", allEntries=true)
-    List<Device> findByDeviceNumber(@Param("deviceNumber") Integer deviceNumber);
-    List<Device> findByDeviceId(@Param("deviceId") Integer deviceId);
     List<Device> findAll();
+    @Cacheable("device")
     List<Device> findByActive(@Param("active") Boolean active);
+    @Cacheable("device")
+    List<Device> findByDeviceNumber(@Param("deviceNumber") Integer deviceNumber);
+    @Cacheable("device")
+    List<Device> findByDeviceId(@Param("deviceId") Integer deviceId);    
+    
+    @Cacheable("device")
+    @CacheEvict(value="device", allEntries=true)
+    <S extends Device> S save(S entity);    
     
 }
