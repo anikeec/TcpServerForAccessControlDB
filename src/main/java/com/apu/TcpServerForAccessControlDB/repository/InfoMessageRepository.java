@@ -6,6 +6,9 @@
 package com.apu.TcpServerForAccessControlDB.repository;
 
 import com.apu.TcpServerForAccessControlDB.entity.InfoMessage;
+
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -13,5 +16,7 @@ import org.springframework.data.repository.CrudRepository;
  * @author apu
  */
 public interface InfoMessageRepository extends CrudRepository<InfoMessage, Integer>{
+    
+    public List<InfoMessage> findAll();
     
 }
