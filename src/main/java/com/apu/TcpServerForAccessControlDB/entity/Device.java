@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Device.findAll", query = "SELECT d FROM Device d")
     , @NamedQuery(name = "Device.findByDeviceId", query = "SELECT d FROM Device d WHERE d.deviceId = :deviceId")
     , @NamedQuery(name = "Device.findByDeviceNumber", query = "SELECT d FROM Device d WHERE d.deviceNumber = :deviceNumber")
-    , @NamedQuery(name = "Device.findByLastPacketId", query = "SELECT d FROM Device d WHERE d.lastPacketId = :lastPacketId")})
+    , @NamedQuery(name = "Device.findByLastPacketId", query = "SELECT d FROM Device d WHERE d.lastPacketId = :lastPacketId")
+    , @NamedQuery(name = "Device.findByActive", query = "SELECT d FROM Device d WHERE d.active = :active")})
 public class Device implements Serializable {
 
     private static final long serialVersionUID = 1L;

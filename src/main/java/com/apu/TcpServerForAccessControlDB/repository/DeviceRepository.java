@@ -22,8 +22,9 @@ public interface DeviceRepository extends CrudRepository<Device, Integer>{
     
     @Cacheable("device")
 //    @CacheEvict(value="device", allEntries=true)
-    public List<Device> findByDeviceNumber(@Param("deviceNumber") Integer deviceNumber);
-    
-    public List<Device> findAll();
+    List<Device> findByDeviceNumber(@Param("deviceNumber") Integer deviceNumber);
+    List<Device> findByDeviceId(@Param("deviceId") Integer deviceId);
+    List<Device> findAll();
+    List<Device> findByActive(@Param("active") Boolean active);
     
 }
