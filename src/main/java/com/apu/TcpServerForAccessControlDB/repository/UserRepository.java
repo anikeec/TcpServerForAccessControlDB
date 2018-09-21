@@ -20,22 +20,22 @@ import org.springframework.data.repository.query.Param;
  */
 public interface UserRepository extends CrudRepository<User, Integer>{
     
-//    @Cacheable("user")
+    @Cacheable("user")
     List<User> findAll();
     
-//    @Cacheable("user")
+    @Cacheable("user")
     List<User> findByEmail(@Param("email") String email);
     
-//    @Cacheable("user")
+    @Cacheable("user")
     List<User> findByUserId(@Param("userId") Integer userId);
     
-//    @Cacheable("user")
+    @Cacheable("user")
     List<User> findByActive(@Param("active") Boolean active);
     
-//    @CacheEvict(value="user", allEntries=true)
+    @CacheEvict(value="user", allEntries=true)
     <S extends User> S save(S entity);
     
-//    @CacheEvict(value="user", allEntries=true)
+    @CacheEvict(value="user", allEntries=true)
     void delete(User entity);
     
 }

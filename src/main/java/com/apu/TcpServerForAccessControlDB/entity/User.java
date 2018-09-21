@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "user")
 @XmlRootElement
-//@RedisHash("user")
+@RedisHash("user")
 @JsonIgnoreProperties("cardCollection")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
