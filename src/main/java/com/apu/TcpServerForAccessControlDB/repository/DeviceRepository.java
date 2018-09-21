@@ -13,20 +13,22 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author apu
  */
+@Repository
 public interface DeviceRepository extends CrudRepository<Device, Integer>{
     
     @Cacheable("device")
     List<Device> findAll();
-    @Cacheable("device")
+    @Cacheable(value = "device")
     List<Device> findByActive(@Param("active") Boolean active);
-    @Cacheable("device")
+    @Cacheable(value = "device")
     List<Device> findByDeviceNumber(@Param("deviceNumber") Integer deviceNumber);
-    @Cacheable("device")
+    @Cacheable(value = "device")
     List<Device> findByDeviceId(@Param("deviceId") Integer deviceId);    
     
     @Cacheable("device")
