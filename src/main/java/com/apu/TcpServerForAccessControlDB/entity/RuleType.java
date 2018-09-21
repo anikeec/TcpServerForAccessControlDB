@@ -22,6 +22,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.springframework.data.redis.core.RedisHash;
+
 /**
  *
  * @author apu
@@ -29,6 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "rule_type")
 @XmlRootElement
+@RedisHash("ruletype")
 @NamedQueries({
     @NamedQuery(name = "RuleType.findAll", query = "SELECT r FROM RuleType r")
     , @NamedQuery(name = "RuleType.findByRuleTypeId", query = "SELECT r FROM RuleType r WHERE r.ruleTypeId = :ruleTypeId")

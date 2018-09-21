@@ -21,11 +21,18 @@ import org.springframework.data.repository.query.Param;
 public interface EventTypeRepository extends CrudRepository<EventType, Integer>{
     
     @Cacheable("eventtype")
-//    @CacheEvict(value="eventtype", allEntries=true)
+    List<EventType> findAll();
+    
+    @Cacheable("eventtype")
     List<EventType> findByEventId(@Param("eventId") Integer eventId);
     
     @Cacheable("eventtype")
-//    @CacheEvict(value="eventtype", allEntries=true)
     List<EventType> findByDescription(@Param("description") String description);
-    List<EventType> findAll();
+
+    @CacheEvict(value="eventtype", allEntries=true)
+    <S extends EventType> S save(S entity);
+
+    @CacheEvict(value="eventtype", allEntries=true)
+    void delete(EventType entity);
+    
 }

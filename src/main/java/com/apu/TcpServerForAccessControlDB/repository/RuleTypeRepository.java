@@ -20,10 +20,19 @@ import org.springframework.data.repository.query.Param;
  */
 public interface RuleTypeRepository extends CrudRepository<RuleType, Integer>{
     
-    @Cacheable("ruletype")
-    @CacheEvict(value="ruletype", allEntries=true)
+    @Cacheable("ruletype")    
     List<RuleType> findByRuleTypeId(@Param("ruleTypeId") Integer ruleTypeId);
+    
+    @Cacheable("ruletype")
     List<RuleType> findByDescription(@Param("description") String description);
+    
+    @Cacheable("ruletype")
     List<RuleType> findAll();
     
+    @CacheEvict(value="ruletype", allEntries=true)
+    <S extends RuleType> S save(S entity);
+    
+    @CacheEvict(value="ruletype", allEntries=true)
+    void delete(RuleType entity);
+
 }

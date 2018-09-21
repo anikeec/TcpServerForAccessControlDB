@@ -20,11 +20,22 @@ import org.springframework.data.repository.query.Param;
  */
 public interface CardRepository extends CrudRepository<Card, Integer>{
     
-    @Cacheable("card")
-//    @CacheEvict(value="card", allEntries=true)
-    public List<Card> findByCardNumber(@Param("cardNumber") String cardNumber);    
-    public List<Card> findByCardId(@Param("cardId") Integer cardId);
-    public List<Card> findByActive(@Param("active") Boolean active);
+//    @Cacheable("card")
     public List<Card> findAll();
+    
+//    @Cacheable("card")
+    public List<Card> findByCardId(@Param("cardId") Integer cardId);
+    
+//    @Cacheable("card")
+    public List<Card> findByCardNumber(@Param("cardNumber") String cardNumber);  
+    
+//    @Cacheable("card")
+    public List<Card> findByActive(@Param("active") Boolean active);
+
+//    @CacheEvict(value="card", allEntries=true)
+    <S extends Card> S save(S entity);
+
+//    @CacheEvict(value="card", allEntries=true)
+    void delete(Card entity);
     
 }

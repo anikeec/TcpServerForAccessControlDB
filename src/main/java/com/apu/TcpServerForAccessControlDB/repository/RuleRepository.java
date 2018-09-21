@@ -24,18 +24,33 @@ import org.springframework.data.repository.query.Param;
  */
 public interface RuleRepository extends CrudRepository<Rule, Integer>{
     
-    @Cacheable("rule")
-//    @CacheEvict(value="rule", allEntries=true)
+//    @Cacheable("rule")
+    List<Rule> findAll();
+    
+//    @Cacheable("rule")
+    List<Rule> findByRuleId(@Param("ruleId") Integer ruleId);
+    
+//    @Cacheable("rule")
+    List<Rule> findByActive(@Param("active") Boolean active);
+    
+//    @Cacheable("rule")
     List<Rule> findByDeviceIdAndCardId(@Param("deviceId") Device deviceId, @Param("cardId") Card cardId);
     
+//    @Cacheable("rule")
     Integer findByCardDeviceEvent(@Param("cardNumber") String cardNumber,
             @Param("deviceNumber") Integer deviceNumber,
             @Param("eventId") Integer eventId);
-    List<Rule> findAll();
-    List<Rule> findByRuleId(@Param("ruleId") Integer ruleId);
+        
+//    @Cacheable("rule")
     List<Rule> findByDeviceIdCardIdEventTypeIdRuleTypeId(@Param("deviceId") Device deviceId,
                                                         @Param("cardId") Card cardId,
                                                         @Param("eventId") EventType eventTypeId,
-                                                        @Param("ruleTypeId") RuleType ruleTypeId);    
-    List<Rule> findByActive(@Param("active") Boolean active);
+                                                        @Param("ruleTypeId") RuleType ruleTypeId); 
+    
+//    @CacheEvict(value="rule", allEntries=true)
+    <S extends Rule> S save(S entity);
+    
+//    @CacheEvict(value="rule", allEntries=true)
+    void delete(Rule entity); 
+    
 }

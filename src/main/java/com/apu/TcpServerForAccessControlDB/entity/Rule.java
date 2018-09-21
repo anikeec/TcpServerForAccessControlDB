@@ -26,6 +26,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.springframework.data.redis.core.RedisHash;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -35,6 +36,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "rule")
 @XmlRootElement
+//@RedisHash("rule")
 @NamedQueries({
     @NamedQuery(name = "Rule.findAll", query = "SELECT r FROM Rule r")
     , @NamedQuery(name = "Rule.findByRuleId", query = "SELECT r FROM Rule r WHERE r.ruleId = :ruleId")

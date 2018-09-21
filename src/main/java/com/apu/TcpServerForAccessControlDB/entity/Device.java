@@ -30,7 +30,7 @@ import org.springframework.data.redis.core.RedisHash;
 @Entity
 @Table(name = "device")
 @XmlRootElement
-@RedisHash("Device")
+@RedisHash("device")
 @NamedQueries({
     @NamedQuery(name = "Device.findAll", query = "SELECT d FROM Device d")
     , @NamedQuery(name = "Device.findByDeviceId", query = "SELECT d FROM Device d WHERE d.deviceId = :deviceId")

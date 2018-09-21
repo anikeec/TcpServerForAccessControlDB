@@ -22,6 +22,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.springframework.data.redis.core.RedisHash;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -31,6 +33,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "user")
 @XmlRootElement
+//@RedisHash("user")
 @JsonIgnoreProperties("cardCollection")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
