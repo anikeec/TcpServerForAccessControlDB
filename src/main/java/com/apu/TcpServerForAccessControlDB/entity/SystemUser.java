@@ -43,7 +43,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
     , @NamedQuery(name = "User.findByPhoneNumber", query = "SELECT u FROM User u WHERE u.phoneNumber = :phoneNumber")
     , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
     , @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active")})
-public class User implements Serializable {
+public class SystemUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -71,10 +71,10 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private Collection<Card> cardCollection;
 
-    public User() {
+    public SystemUser() {
     }
 
-    public User(Integer userId) {
+    public SystemUser(Integer userId) {
         this.userId = userId;
     }
 
@@ -153,10 +153,10 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof SystemUser)) {
             return false;
         }
-        User other = (User) object;
+        SystemUser other = (SystemUser) object;
         if ((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId))) {
             return false;
         }

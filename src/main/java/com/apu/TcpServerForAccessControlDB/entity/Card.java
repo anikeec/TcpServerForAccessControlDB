@@ -58,7 +58,7 @@ public class Card implements Serializable {
     private Collection<Rule> ruleCollection;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    private User userId;
+    private SystemUser userId;
 
     public Card() {
     }
@@ -109,11 +109,11 @@ public class Card implements Serializable {
         this.active = active;
     }
 
-    public User getUserId() {
+    public SystemUser getUserId() {
         return userId;
     }
 
-    public void setUserId(User userId) {
+    public void setUserId(SystemUser userId) {
         this.userId = userId;
     }
 
