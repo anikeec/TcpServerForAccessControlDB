@@ -36,13 +36,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @RedisHash("systemUser")
 @JsonIgnoreProperties("cardCollection")
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
-    , @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId")
-    , @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName")
-    , @NamedQuery(name = "User.findBySecondName", query = "SELECT u FROM User u WHERE u.secondName = :secondName")
-    , @NamedQuery(name = "User.findByPhoneNumber", query = "SELECT u FROM User u WHERE u.phoneNumber = :phoneNumber")
-    , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
-    , @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active")})
+    @NamedQuery(name = "SystemUser.findAll", query = "SELECT u FROM SystemUser u")
+    , @NamedQuery(name = "SystemUser.findByUserId", query = "SELECT u FROM SystemUser u WHERE u.userId = :userId")
+    , @NamedQuery(name = "SystemUser.findByFirstName", query = "SELECT u FROM SystemUser u WHERE u.firstName = :firstName")
+    , @NamedQuery(name = "SystemUser.findBySecondName", query = "SELECT u FROM SystemUser u WHERE u.secondName = :secondName")
+    , @NamedQuery(name = "SystemUser.findByPhoneNumber", query = "SELECT u FROM SystemUser u WHERE u.phoneNumber = :phoneNumber")
+    , @NamedQuery(name = "SystemUser.findByEmail", query = "SELECT u FROM SystemUser u WHERE u.email = :email")
+    , @NamedQuery(name = "SystemUser.findByActive", query = "SELECT u FROM SystemUser u WHERE u.active = :active")})
 public class SystemUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -165,7 +165,7 @@ public class SystemUser implements Serializable {
 
     @Override
     public String toString() {
-        return "com.apu.TcpServerForAccessControl.entity.User[ userId=" + userId + " ]";
+        return "com.apu.TcpServerForAccessControl.entity.SystemUser[ userId=" + userId + " ]";
     }
     
 }

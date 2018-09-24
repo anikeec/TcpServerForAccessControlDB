@@ -38,7 +38,7 @@ import org.springframework.data.redis.core.RedisHash;
     @NamedQuery(name = "Card.findAll", query = "SELECT c FROM Card c")
     , @NamedQuery(name = "Card.findByCardId", query = "SELECT c FROM Card c WHERE c.cardId = :cardId")
     , @NamedQuery(name = "Card.findByCardNumber", query = "SELECT c FROM Card c WHERE c.cardNumber = :cardNumber")
-    , @NamedQuery(name = "Card.findByActive", query = "SELECT c FROM Card c JOIN User u ON c.userId = u.userId WHERE c.active = :active")})
+    , @NamedQuery(name = "Card.findByActive", query = "SELECT c FROM Card c JOIN SystemUser u ON c.userId = u.userId WHERE c.active = :active")})
 public class Card implements Serializable {
 
     private static final long serialVersionUID = 1L;
