@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -21,6 +22,7 @@ import org.springframework.data.repository.query.Param;
 public interface CardRepository extends CrudRepository<Card, Integer>{
     
     @Cacheable("card")
+    @Query(value = "SELECT c FROM Card c INNER JOIN FETCH c.userId u", nativeQuery = false)
     public List<Card> findAll();
     
     @Cacheable("card")
