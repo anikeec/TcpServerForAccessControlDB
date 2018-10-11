@@ -41,7 +41,7 @@ public interface AccessMessageRepository extends CrudRepository<AccessMessage, I
             @Param("description") String description,
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") @Param("date") Date date);
     
-//    @Query(value = "SELECT * FROM Access_message a JOIN Device d ON a.device_id = d.device_id", nativeQuery = true)
+//     @Query(value = "SELECT * FROM Access_message a JOIN Device d ON a.device_id = d.device_id", nativeQuery = true)
     @Query(value = "SELECT a FROM AccessMessage a INNER JOIN FETCH a.deviceId d INNER JOIN FETCH a.cardId c", nativeQuery = false)
     public List<AccessMessage> findAll();
     
