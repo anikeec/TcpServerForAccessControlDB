@@ -45,4 +45,11 @@ public interface AccessMessageRepository extends CrudRepository<AccessMessage, I
     @Query(value = "SELECT a FROM AccessMessage a INNER JOIN FETCH a.deviceId d INNER JOIN FETCH a.cardId c", nativeQuery = false)
     public List<AccessMessage> findAll();
     
+    @Query(value = "SELECT * FROM "
+            + "(SELECT * FROM access_message AS am "
+            + "INNER JOIN device d ON am.device_id=d.device_id "
+            + "INNER JOIN card c ON am.card_id=c.card_id  "
+            + "WHERE am.access_mess_id > 0 ORDER BY am.access_mess_id LIMIT 10 OFFSET :page * 10) a", nativeQuery = true)
+    public List<AccessMessage> findAllByPage(@Param("page") Integer page);
+    
 }
