@@ -45,7 +45,7 @@ public class AccessMessage implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "access_mess_id")
+    @Column(name = "access_mess_id", nullable = false, unique = true)
     private Integer accessMessId;
 //    @Size(max = 255)
     @Column(name = "description", length = 255)

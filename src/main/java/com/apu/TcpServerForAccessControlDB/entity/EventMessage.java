@@ -42,7 +42,7 @@ public class EventMessage implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "event_mess_id")
+    @Column(name = "event_mess_id", nullable = false, unique = true)
     private Integer eventMessId;
 //    @Size(max = 255)
     @Column(name = "description", length = 255)

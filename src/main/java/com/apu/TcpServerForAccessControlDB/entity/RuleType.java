@@ -42,7 +42,7 @@ public class RuleType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "rule_type_id")
+    @Column(name = "rule_type_id", nullable = false, unique = true)
     private Integer ruleTypeId;
 //    @Size(max = 255)
     @Column(name = "description", length = 255)

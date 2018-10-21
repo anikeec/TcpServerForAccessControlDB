@@ -55,7 +55,7 @@ public class Rule implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "rule_id")
+    @Column(name = "rule_id", nullable = false, unique = true)
     private Integer ruleId;
     @Column(name = "date_begin")
     @Temporal(TemporalType.TIMESTAMP)

@@ -42,7 +42,7 @@ public class EventType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "event_id")
+    @Column(name = "event_id", nullable = false, unique = true)
     private Integer eventId;
 //    @Size(max = 255)
     @Column(name = "description", length = 255)

@@ -43,7 +43,7 @@ public class Device implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "device_id")
+    @Column(name = "device_id", nullable = false, unique = true)
     private Integer deviceId;
     @Column(name = "device_number")
     private Integer deviceNumber;

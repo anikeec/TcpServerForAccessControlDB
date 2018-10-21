@@ -49,7 +49,7 @@ public class SystemUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false, unique = true)
     private Integer userId;
 //    @Size(max = 255)
     @Column(name = "first_name", length = 255)

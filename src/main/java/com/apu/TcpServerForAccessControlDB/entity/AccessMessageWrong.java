@@ -43,7 +43,7 @@ public class AccessMessageWrong implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "access_mess_id")
+    @Column(name = "access_mess_id", nullable = false, unique = true)
     private Integer accessMessId;
     @Basic(optional = false)
     @Column(name = "card_number", length = 255)

@@ -45,7 +45,7 @@ public class Card implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "card_id")
+    @Column(name = "card_id", nullable = false, unique = true)
     private Integer cardId;
 //    @Size(max = 255)
     @Column(name = "card_number", length = 255)
