@@ -46,6 +46,7 @@ public interface AccessMessageRepository extends PagingAndSortingRepository<Acce
     
 //     @Query(value = "SELECT * FROM Access_message a JOIN Device d ON a.device_id = d.device_id", nativeQuery = true)
 //    @Query(value = "SELECT a FROM AccessMessage a INNER JOIN FETCH a.deviceId d INNER JOIN FETCH a.cardId c", nativeQuery = false)
+//    @Query(value = "SELECT * FROM (SELECT * FROM access_message AS am LIMIT 20 offset 10)", nativeQuery = true)
     public Page<AccessMessage> findAll(Pageable pageable);
     
 //    @Query(value = "SELECT * FROM "

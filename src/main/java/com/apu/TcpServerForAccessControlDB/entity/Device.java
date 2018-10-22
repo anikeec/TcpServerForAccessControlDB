@@ -23,6 +23,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.springframework.data.redis.core.RedisHash;
 
+import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;
+
 /**
  *
  * @author apu
@@ -37,7 +39,7 @@ import org.springframework.data.redis.core.RedisHash;
     , @NamedQuery(name = "Device.findByDeviceNumber", query = "SELECT d FROM Device d WHERE d.deviceNumber = :deviceNumber")
     , @NamedQuery(name = "Device.findByLastPacketId", query = "SELECT d FROM Device d WHERE d.lastPacketId = :lastPacketId")
     , @NamedQuery(name = "Device.findByActive", query = "SELECT d FROM Device d WHERE d.active = :active")})
-public class Device implements Serializable {
+public class Device implements Serializable, ActivatableEntity {
 
     private static final long serialVersionUID = 1L;
     @Id

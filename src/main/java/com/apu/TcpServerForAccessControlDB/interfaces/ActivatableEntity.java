@@ -1,4 +1,4 @@
-package com.apu.TcpServerForAccessControlDB;
+package com.apu.TcpServerForAccessControlDB.interfaces;
 
 public interface ActivatableEntity {
     

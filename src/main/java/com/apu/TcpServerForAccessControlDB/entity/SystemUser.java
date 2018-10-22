@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.springframework.data.redis.core.RedisHash;
 
+import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -43,7 +44,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
     , @NamedQuery(name = "SystemUser.findByPhoneNumber", query = "SELECT u FROM SystemUser u WHERE u.phoneNumber = :phoneNumber")
     , @NamedQuery(name = "SystemUser.findByEmail", query = "SELECT u FROM SystemUser u WHERE u.email = :email")
     , @NamedQuery(name = "SystemUser.findByActive", query = "SELECT u FROM SystemUser u WHERE u.active = :active")})
-public class SystemUser implements Serializable {
+public class SystemUser implements Serializable, ActivatableEntity {
 
     private static final long serialVersionUID = 1L;
     @Id

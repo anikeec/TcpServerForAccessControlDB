@@ -29,6 +29,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;
+
 /**
  *
  * @author apu
@@ -49,7 +51,7 @@ import org.springframework.format.annotation.DateTimeFormat;
             + " FROM Rule r, Card c, Device d, EventType e WHERE r.cardId=c.cardId AND r.deviceId=d.deviceId AND r.eventId=e.eventId" 
             + " AND d.deviceNumber=:deviceNumber AND e.eventId=:eventId AND c.cardNumber LIKE :cardNumber")
     , @NamedQuery(name = "Rule.findByActive", query = "SELECT r FROM Rule r WHERE r.active = :active")})
-public class Rule implements Serializable {
+public class Rule implements Serializable, ActivatableEntity {
 
     private static final long serialVersionUID = 1L;
     @Id

@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.springframework.data.redis.core.RedisHash;
 
-import com.apu.TcpServerForAccessControlDB.ActivatableEntity;
+import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;
 
 /**
  *
