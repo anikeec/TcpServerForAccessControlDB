@@ -26,6 +26,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.springframework.data.redis.core.RedisHash;
 
+import com.apu.TcpServerForAccessControlDB.ActivatableEntity;
+
 /**
  *
  * @author apu
@@ -39,7 +41,7 @@ import org.springframework.data.redis.core.RedisHash;
     , @NamedQuery(name = "Card.findByCardId", query = "SELECT c FROM Card c WHERE c.cardId = :cardId")
     , @NamedQuery(name = "Card.findByCardNumber", query = "SELECT c FROM Card c WHERE c.cardNumber = :cardNumber")
     , @NamedQuery(name = "Card.findByActive", query = "SELECT c FROM Card c JOIN SystemUser u ON c.userId = u.userId WHERE c.active = :active")})
-public class Card implements Serializable {
+public class Card implements Serializable, ActivatableEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
