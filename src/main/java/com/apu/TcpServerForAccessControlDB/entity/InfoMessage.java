@@ -24,6 +24,8 @@ import javax.persistence.TemporalType;
 //import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.apu.TcpServerForAccessControlDB.interfaces.AccessControlEntity;
+
 /**
  *
  * @author apu
@@ -36,7 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "InfoMessage.findByInfoMessId", query = "SELECT i FROM InfoMessage i WHERE i.infoMessId = :infoMessId")
     , @NamedQuery(name = "InfoMessage.findByDescription", query = "SELECT i FROM InfoMessage i WHERE i.description = :description")
     , @NamedQuery(name = "InfoMessage.findByDate", query = "SELECT i FROM InfoMessage i WHERE i.date = :date")})
-public class InfoMessage implements Serializable {
+public class InfoMessage implements Serializable, AccessControlEntity {
 
     private static final long serialVersionUID = 1L;
     @Id

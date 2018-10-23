@@ -24,6 +24,8 @@ import javax.persistence.TemporalType;
 //import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.apu.TcpServerForAccessControlDB.interfaces.AccessControlEntity;
+
 /**
  *
  * @author apu
@@ -36,7 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "EventMessage.findByEventMessId", query = "SELECT e FROM EventMessage e WHERE e.eventMessId = :eventMessId")
     , @NamedQuery(name = "EventMessage.findByDescription", query = "SELECT e FROM EventMessage e WHERE e.description = :description")
     , @NamedQuery(name = "EventMessage.findByDate", query = "SELECT e FROM EventMessage e WHERE e.date = :date")})
-public class EventMessage implements Serializable {
+public class EventMessage implements Serializable, AccessControlEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
