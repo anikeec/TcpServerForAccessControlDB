@@ -27,6 +27,8 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.apu.TcpServerForAccessControlDB.interfaces.AccessControlEntity;
+
 /**
  *
  * @author apu
@@ -39,7 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "AccessMessage.findByAccessMessId", query = "SELECT a FROM AccessMessage a WHERE a.accessMessId = :accessMessId")
     , @NamedQuery(name = "AccessMessage.findByDescription", query = "SELECT a FROM AccessMessage a WHERE a.description = :description")
     , @NamedQuery(name = "AccessMessage.findByDate", query = "SELECT a FROM AccessMessage a WHERE a.date = :date")})
-public class AccessMessage implements Serializable {
+public class AccessMessage implements Serializable, AccessControlEntity {
 
     private static final long serialVersionUID = 1L;
     @Id

@@ -1,6 +1,6 @@
 package com.apu.TcpServerForAccessControlDB.interfaces;
 
-public interface ActivatableEntity {
+public interface ActivatableEntity extends AccessControlEntity {
     
     Boolean getActive();
 
