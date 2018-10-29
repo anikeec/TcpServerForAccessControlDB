@@ -71,6 +71,8 @@ public class SystemUser implements Serializable, ActivatableEntity {
     private Boolean active = false;
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private Collection<Card> cardCollection;
+    @OneToMany(mappedBy = "userId", fetch = FetchType.EAGER)
+    private Collection<UserroleUser> userroleUserCollection;
 
     public SystemUser() {
     }
@@ -142,6 +144,15 @@ public class SystemUser implements Serializable, ActivatableEntity {
 
     public void setCardCollection(Collection<Card> cardCollection) {
         this.cardCollection = cardCollection;
+    }
+    
+    @XmlTransient
+    public Collection<UserroleUser> getUserroleUserCollection() {
+        return userroleUserCollection;
+    }
+
+    public void setUserroleUserCollection(Collection<UserroleUser> userroleUserCollection) {
+        this.userroleUserCollection = userroleUserCollection;
     }
 
     @Override
