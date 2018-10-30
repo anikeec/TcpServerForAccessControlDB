@@ -132,6 +132,9 @@ public class EventType implements Serializable {
         if ((this.eventId == null && other.eventId != null) || (this.eventId != null && !this.eventId.equals(other.eventId))) {
             return false;
         }
+        if ((this.description == null && other.description != null) || (this.description != null && !this.description.equals(other.description))) {
+            return false;
+        }
         return true;
     }
 

@@ -99,6 +99,9 @@ public class RuleType implements Serializable {
         if ((this.ruleTypeId == null && other.ruleTypeId != null) || (this.ruleTypeId != null && !this.ruleTypeId.equals(other.ruleTypeId))) {
             return false;
         }
+        if ((this.description == null && other.description != null) || (this.description != null && !this.description.equals(other.description))) {
+            return false;
+        }
         return true;
     }
 

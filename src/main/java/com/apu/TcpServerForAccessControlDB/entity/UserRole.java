@@ -104,6 +104,9 @@ public class UserRole implements Serializable {
         if ((this.userRoleId == null && other.userRoleId != null) || (this.userRoleId != null && !this.userRoleId.equals(other.userRoleId))) {
             return false;
         }
+        if ((this.description == null && other.description != null) || (this.description != null && !this.description.equals(other.description))) {
+            return false;
+        }
         return true;
     }
 
