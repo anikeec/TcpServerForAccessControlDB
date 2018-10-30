@@ -42,8 +42,7 @@ public class UserRole implements Serializable {
     @Basic(optional = false)
     @Column(name = "description")
     private String description;
-//    @ManyToMany(mappedBy = "userRoleId", fetch = FetchType.LAZY)
-    @ManyToMany(cascade = { CascadeType.ALL })//(mappedBy = "userId", fetch = FetchType.EAGER)
+    @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "UserroleUser", 
             joinColumns = { @JoinColumn(name = "user_role_id") }, 

@@ -76,7 +76,7 @@ public class SystemUser implements Serializable, ActivatableEntity {
     private Boolean active = false;
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private Collection<Card> cardCollection;
-    @ManyToMany//(cascade = { CascadeType.ALL })//(mappedBy = "userId", fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "UserroleUser", 
             joinColumns = { @JoinColumn(name = "user_id") }, 
