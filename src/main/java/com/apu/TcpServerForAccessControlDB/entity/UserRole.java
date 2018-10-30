@@ -3,12 +3,16 @@ package com.apu.TcpServerForAccessControlDB.entity;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,8 +42,14 @@ public class UserRole implements Serializable {
     @Basic(optional = false)
     @Column(name = "description")
     private String description;
-    @OneToMany(mappedBy = "userRoleId", fetch = FetchType.LAZY)
-    private Collection<UserroleUser> userroleUserCollection;
+//    @ManyToMany(mappedBy = "userRoleId", fetch = FetchType.LAZY)
+    @ManyToMany(cascade = { CascadeType.ALL })//(mappedBy = "userId", fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "UserroleUser", 
+            joinColumns = { @JoinColumn(name = "user_role_id") }, 
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+        )
+    private Collection<SystemUser> userCollection;
 
     public UserRole() {
     }
@@ -70,12 +80,12 @@ public class UserRole implements Serializable {
     }
 
     @XmlTransient
-    public Collection<UserroleUser> getUserroleUserCollection() {
-        return userroleUserCollection;
+    public Collection<SystemUser> getUserCollection() {
+        return userCollection;
     }
 
-    public void setUserroleUserCollection(Collection<UserroleUser> userroleUserCollection) {
-        this.userroleUserCollection = userroleUserCollection;
+    public void setUserCollection(Collection<SystemUser> userCollection) {
+        this.userCollection = userCollection;
     }
 
     @Override

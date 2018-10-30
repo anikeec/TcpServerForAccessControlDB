@@ -6,14 +6,19 @@
 package com.apu.TcpServerForAccessControlDB.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -71,8 +76,13 @@ public class SystemUser implements Serializable, ActivatableEntity {
     private Boolean active = false;
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private Collection<Card> cardCollection;
-    @OneToMany(mappedBy = "userId", fetch = FetchType.EAGER)
-    private Collection<UserroleUser> userroleUserCollection;
+    @ManyToMany//(cascade = { CascadeType.ALL })//(mappedBy = "userId", fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "UserroleUser", 
+            joinColumns = { @JoinColumn(name = "user_id") }, 
+            inverseJoinColumns = { @JoinColumn(name = "user_role_id") }
+        )
+    private Collection<UserRole> userRoleCollection;
 
     public SystemUser() {
     }
@@ -147,12 +157,12 @@ public class SystemUser implements Serializable, ActivatableEntity {
     }
     
     @XmlTransient
-    public Collection<UserroleUser> getUserroleUserCollection() {
-        return userroleUserCollection;
+    public Collection<UserRole> getUserRoleCollection() {
+        return userRoleCollection;
     }
 
-    public void setUserroleUserCollection(Collection<UserroleUser> userroleUserCollection) {
-        this.userroleUserCollection = userroleUserCollection;
+    public void setUserRoleCollection(Collection<UserRole> userRoleCollection) {
+        this.userRoleCollection = userRoleCollection;
     }
 
     @Override

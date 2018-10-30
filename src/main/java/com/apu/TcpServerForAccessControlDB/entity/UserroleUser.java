@@ -31,7 +31,7 @@ public class UserroleUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "uru_id")
+    @Column(name = "uru_id", nullable = false, unique = true)
     private Integer uruId;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(fetch = FetchType.LAZY)
