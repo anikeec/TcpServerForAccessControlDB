@@ -8,6 +8,8 @@ package com.apu.TcpServerForAccessControlDB.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -82,7 +84,7 @@ public class SystemUser implements Serializable, ActivatableEntity {
             joinColumns = { @JoinColumn(name = "user_id") }, 
             inverseJoinColumns = { @JoinColumn(name = "user_role_id") }
         )
-    private Collection<UserRole> userRoleCollection;
+    private Set<UserRole> userRoleCollection;
 
     public SystemUser() {
     }
@@ -157,11 +159,11 @@ public class SystemUser implements Serializable, ActivatableEntity {
     }
     
     @XmlTransient
-    public Collection<UserRole> getUserRoleCollection() {
+    public Set<UserRole> getUserRoleCollection() {
         return userRoleCollection;
     }
 
-    public void setUserRoleCollection(Collection<UserRole> userRoleCollection) {
+    public void setUserRoleCollection(Set<UserRole> userRoleCollection) {
         this.userRoleCollection = userRoleCollection;
     }
 
