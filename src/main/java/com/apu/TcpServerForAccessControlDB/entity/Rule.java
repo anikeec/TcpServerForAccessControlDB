@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.springframework.data.redis.core.RedisHash;
+//import org.springframework.data.redis.core.RedisHash;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;

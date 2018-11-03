@@ -22,7 +22,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.springframework.data.redis.core.RedisHash;
+//import org.springframework.data.redis.core.RedisHash;
 
 /**
  *
@@ -31,7 +31,7 @@ import org.springframework.data.redis.core.RedisHash;
 @Entity
 @Table(name = "event_type")
 @XmlRootElement
-@RedisHash("eventtype")
+//@RedisHash("eventtype")
 @NamedQueries({
     @NamedQuery(name = "EventType.findAll", query = "SELECT e FROM EventType e")
     , @NamedQuery(name = "EventType.findByEventId", query = "SELECT e FROM EventType e WHERE e.eventId = :eventId")

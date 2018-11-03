@@ -29,7 +29,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.springframework.data.redis.core.RedisHash;
+//import org.springframework.data.redis.core.RedisHash;
 
 import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -41,7 +41,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "system_user")
 @XmlRootElement
-@RedisHash("systemUser")
+//@RedisHash("systemUser")
 @JsonIgnoreProperties("cardCollection")
 @NamedQueries({
     @NamedQuery(name = "SystemUser.findAll", query = "SELECT u FROM SystemUser u")

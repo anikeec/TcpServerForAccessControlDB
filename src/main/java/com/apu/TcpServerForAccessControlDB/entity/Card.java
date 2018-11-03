@@ -24,7 +24,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.springframework.data.redis.core.RedisHash;
+//import org.springframework.data.redis.core.RedisHash;
 
 import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;
 import com.apu.TcpServerForAccessControlDB.interfaces.VisualizableEntity;
@@ -36,7 +36,7 @@ import com.apu.TcpServerForAccessControlDB.interfaces.VisualizableEntity;
 @Entity
 @Table(name = "card")
 @XmlRootElement
-@RedisHash("card")
+//@RedisHash("card")
 @NamedQueries({
     @NamedQuery(name = "Card.findAll", query = "SELECT c FROM Card c")
     , @NamedQuery(name = "Card.findByCardId", query = "SELECT c FROM Card c WHERE c.cardId = :cardId")
