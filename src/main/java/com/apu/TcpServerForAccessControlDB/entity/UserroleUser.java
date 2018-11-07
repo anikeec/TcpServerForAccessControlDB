@@ -29,7 +29,7 @@ public class UserroleUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "uru_id", nullable = false, unique = true)
     private Integer uruId;
