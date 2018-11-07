@@ -55,7 +55,7 @@ public class SystemUser implements Serializable, ActivatableEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Basic(optional = false)
     @Column(name = "user_id", nullable = false, unique = true)
     private Integer userId;
