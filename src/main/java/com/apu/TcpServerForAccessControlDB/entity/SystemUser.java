@@ -78,12 +78,7 @@ public class SystemUser implements Serializable, ActivatableEntity {
     private Boolean active = false;
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private Collection<Card> cardCollection;
-    @ManyToMany
-    @JoinTable(
-            name = "UserroleUser", 
-            joinColumns = { @JoinColumn(name = "user_id") }, 
-            inverseJoinColumns = { @JoinColumn(name = "user_role_id") }
-        )
+    @ManyToMany(mappedBy = "userCollection")
     private Set<UserRole> userRoleCollection;
 
     public SystemUser() {
