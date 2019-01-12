@@ -1,9 +1,8 @@
 package com.apu.TcpServerForAccessControlDB.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -18,10 +17,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 /**
  *
@@ -30,59 +32,39 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "user_role", catalog = "accesscontroldb", schema = "")
 @XmlRootElement
+@RequiredArgsConstructor
 @NamedQueries({
     @NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u")
-    , @NamedQuery(name = "UserRole.findByUserRoleId", query = "SELECT u FROM UserRole u WHERE u.userRoleId = :userRoleId")
-    , @NamedQuery(name = "UserRole.findByDescription", query = "SELECT u FROM UserRole u WHERE u.description = :description")})
+    , @NamedQuery(name = "UserRole.findByUserRoleId", 
+                    query = "SELECT u FROM UserRole u WHERE u.userRoleId = :userRoleId")
+    , @NamedQuery(name = "UserRole.findByDescription", 
+                    query = "SELECT u FROM UserRole u WHERE u.description = :description")})
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "user_role_id")
+    @Getter @Setter
     private Integer userRoleId;
+    
     @Basic(optional = false)
     @Column(name = "description")
+    @Getter @Setter
     private String description;
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH })
+    
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
     @JoinTable(
             name = "UserroleUser", 
             joinColumns = { @JoinColumn(name = "user_role_id") }, 
             inverseJoinColumns = { @JoinColumn(name = "user_id") }
         )
-    private List<SystemUser> userCollection;
-
-    public UserRole() {
-    }
-    
-    public UserRole(String description) {
-        super();
-        this.description = description;
-    }
-
-    public UserRole(Integer userRoleId) {
-        this.userRoleId = userRoleId;
-    }
+    private List<SystemUser> userCollection = new ArrayList<>();
 
     public UserRole(Integer userRoleId, String description) {
         this.userRoleId = userRoleId;
-        this.description = description;
-    }
-
-    public Integer getUserRoleId() {
-        return userRoleId;
-    }
-
-    public void setUserRoleId(Integer userRoleId) {
-        this.userRoleId = userRoleId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -109,10 +91,12 @@ public class UserRole implements Serializable {
             return false;
         }
         UserRole other = (UserRole) object;
-        if ((this.userRoleId == null && other.userRoleId != null) || (this.userRoleId != null && !this.userRoleId.equals(other.userRoleId))) {
+        if ((this.userRoleId == null && other.userRoleId != null) || 
+                (this.userRoleId != null && !this.userRoleId.equals(other.userRoleId))) {
             return false;
         }
-        if ((this.description == null && other.description != null) || (this.description != null && !this.description.equals(other.description))) {
+        if ((this.description == null && other.description != null) || 
+                (this.description != null && !this.description.equals(other.description))) {
             return false;
         }
         return true;
