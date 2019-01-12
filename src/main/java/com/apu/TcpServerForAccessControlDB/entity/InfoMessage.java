@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.apu.TcpServerForAccessControlDB.entity;
 
 import java.io.Serializable;
@@ -21,10 +16,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-//import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.apu.TcpServerForAccessControlDB.interfaces.AccessControlEntity;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
@@ -33,6 +31,7 @@ import com.apu.TcpServerForAccessControlDB.interfaces.AccessControlEntity;
 @Entity
 @Table(name = "info_message")
 @XmlRootElement
+@NoArgsConstructor
 @NamedQueries({
     @NamedQuery(name = "InfoMessage.findAll", query = "SELECT i FROM InfoMessage i")
     , @NamedQuery(name = "InfoMessage.findByInfoMessId", query = "SELECT i FROM InfoMessage i WHERE i.infoMessId = :infoMessId")
@@ -41,70 +40,33 @@ import com.apu.TcpServerForAccessControlDB.interfaces.AccessControlEntity;
 public class InfoMessage implements Serializable, AccessControlEntity {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "info_mess_id", nullable = false, unique = true)
+    @Getter @Setter
     private Integer infoMessId;
-//    @Size(max = 255)
+
     @Column(name = "description", length = 255)
+    @Getter @Setter
     private String description;
+    
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
+    @Getter @Setter
     private Date date;
+    
     @JoinColumn(name = "device_id", referencedColumnName = "device_id")
     @ManyToOne(fetch = FetchType.LAZY)
+    @Getter @Setter
     private Device deviceId;
+    
     @JoinColumn(name = "event_id", referencedColumnName = "event_id")
     @ManyToOne(fetch = FetchType.EAGER)
+    @Getter @Setter
     private EventType eventId;
 
-    public InfoMessage() {
-    }
-
-    public InfoMessage(Integer infoMessId) {
-        this.infoMessId = infoMessId;
-    }
-
-    public Integer getInfoMessId() {
-        return infoMessId;
-    }
-
-    public void setInfoMessId(Integer infoMessId) {
-        this.infoMessId = infoMessId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Device getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(Device deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public EventType getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(EventType eventId) {
-        this.eventId = eventId;
-    }
 
     @Override
     public int hashCode() {
@@ -120,7 +82,8 @@ public class InfoMessage implements Serializable, AccessControlEntity {
             return false;
         }
         InfoMessage other = (InfoMessage) object;
-        if ((this.infoMessId == null && other.infoMessId != null) || (this.infoMessId != null && !this.infoMessId.equals(other.infoMessId))) {
+        if ((this.infoMessId == null && other.infoMessId != null) || 
+                (this.infoMessId != null && !this.infoMessId.equals(other.infoMessId))) {
             return false;
         }
         return true;

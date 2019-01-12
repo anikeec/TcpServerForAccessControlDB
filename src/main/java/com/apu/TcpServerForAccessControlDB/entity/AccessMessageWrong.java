@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.apu.TcpServerForAccessControlDB.entity;
 
 import java.io.Serializable;
@@ -18,11 +13,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-//import javax.validation.constraints.NotNull;
-//import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.apu.TcpServerForAccessControlDB.interfaces.AccessControlEntity;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
@@ -31,6 +28,7 @@ import com.apu.TcpServerForAccessControlDB.interfaces.AccessControlEntity;
 @Entity
 @Table(name = "access_message_wrong")
 @XmlRootElement
+@NoArgsConstructor
 @NamedQueries({
     @NamedQuery(name = "AccessMessageWrong.findAll", query = "SELECT a FROM AccessMessageWrong a")
     , @NamedQuery(name = "AccessMessageWrong.findByAccessMessId", query = "SELECT a FROM AccessMessageWrong a WHERE a.accessMessId = :accessMessId")
@@ -42,98 +40,46 @@ import com.apu.TcpServerForAccessControlDB.interfaces.AccessControlEntity;
 public class AccessMessageWrong implements Serializable, AccessControlEntity {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "access_mess_id", nullable = false, unique = true)
+    @Getter @Setter
     private Integer accessMessId;
+    
     @Basic(optional = false)
     @Column(name = "card_number", length = 255)
+    @Getter @Setter
     private String cardNumber;
+    
     @Basic(optional = false)
     @Column(name = "device_number")
+    @Getter @Setter
     private Integer deviceNumber;
+    
     @Basic(optional = false)
     @Column(name = "event_id")
+    @Getter @Setter
     private Integer eventId;
+    
     @Basic(optional = false)
-//    @Size(min = 1, max = 255)
     @Column(name = "description", length = 255)
+    @Getter @Setter
     private String description;
+    
     @Basic(optional = false)
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
+    @Getter @Setter
     private Date date;
 
-    public AccessMessageWrong() {
-    }
 
-    public AccessMessageWrong(Integer accessMessId) {
-        this.accessMessId = accessMessId;
-    }
-    
     public AccessMessageWrong(String cardNumber, Integer deviceNumber, Integer eventId, Date date, String description) {
         this.cardNumber = cardNumber;
         this.deviceNumber = deviceNumber;
         this.eventId = eventId;
         this.description = description;
-        this.date = date;
-    }
-
-    public AccessMessageWrong(Integer accessMessId, String cardNumber, Integer deviceNumber, Integer eventId, String description, Date date) {
-        this.accessMessId = accessMessId;
-        this.cardNumber = cardNumber;
-        this.deviceNumber = deviceNumber;
-        this.eventId = eventId;
-        this.description = description;
-        this.date = date;
-    }
-
-    public Integer getAccessMessId() {
-        return accessMessId;
-    }
-
-    public void setAccessMessId(Integer accessMessId) {
-        this.accessMessId = accessMessId;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public Integer getDeviceNumber() {
-        return deviceNumber;
-    }
-
-    public void setDeviceId(Integer deviceNumber) {
-        this.deviceNumber = deviceNumber;
-    }
-
-    public Integer getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(Integer eventId) {
-        this.eventId = eventId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -151,7 +97,8 @@ public class AccessMessageWrong implements Serializable, AccessControlEntity {
             return false;
         }
         AccessMessageWrong other = (AccessMessageWrong) object;
-        if ((this.accessMessId == null && other.accessMessId != null) || (this.accessMessId != null && !this.accessMessId.equals(other.accessMessId))) {
+        if ((this.accessMessId == null && other.accessMessId != null) || 
+                (this.accessMessId != null && !this.accessMessId.equals(other.accessMessId))) {
             return false;
         }
         return true;

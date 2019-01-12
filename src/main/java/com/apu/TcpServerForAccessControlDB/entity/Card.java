@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.apu.TcpServerForAccessControlDB.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-//import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -28,6 +24,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;
 import com.apu.TcpServerForAccessControlDB.interfaces.VisualizableEntity;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
@@ -37,6 +37,7 @@ import com.apu.TcpServerForAccessControlDB.interfaces.VisualizableEntity;
 @Table(name = "card")
 @XmlRootElement
 //@RedisHash("card")
+@NoArgsConstructor
 @NamedQueries({
     @NamedQuery(name = "Card.findAll", query = "SELECT c FROM Card c")
     , @NamedQuery(name = "Card.findByCardId", query = "SELECT c FROM Card c WHERE c.cardId = :cardId")
@@ -45,79 +46,50 @@ import com.apu.TcpServerForAccessControlDB.interfaces.VisualizableEntity;
 public class Card implements Serializable, ActivatableEntity, VisualizableEntity {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "card_id", nullable = false, unique = true)
+    @Getter @Setter
     private Integer cardId;
-//    @Size(max = 255)
+
     @Column(name = "card_number", length = 255)
+    @Getter @Setter
     private String cardNumber;
+    
     @Column(name = "active")
+    @Getter @Setter
     private Boolean active = false;
+    
     @OneToMany(mappedBy = "cardId", fetch = FetchType.LAZY)
-    private Collection<AccessMessage> accessMessageCollection;
+    private List<AccessMessage> accessMessageCollection = new ArrayList<>();
+    
     @OneToMany(mappedBy = "cardId", fetch = FetchType.LAZY)
-    private Collection<Rule> ruleCollection;
+    private List<Rule> ruleCollection = new ArrayList<>();
+    
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne(fetch = FetchType.LAZY)
+    @Getter @Setter
     private SystemUser userId;
 
-    public Card() {
-    }
-
-    public Card(Integer cardId) {
-        this.cardId = cardId;
-    }
-
-    public Integer getCardId() {
-        return cardId;
-    }
-
-    public void setCardId(Integer cardId) {
-        this.cardId = cardId;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
 
     @XmlTransient
-    public Collection<AccessMessage> getAccessMessageCollection() {
+    public List<AccessMessage> getAccessMessageCollection() {
         return accessMessageCollection;
     }
 
-    public void setAccessMessageCollection(Collection<AccessMessage> accessMessageCollection) {
+    public void setAccessMessageCollection(List<AccessMessage> accessMessageCollection) {
         this.accessMessageCollection = accessMessageCollection;
     }
 
     @XmlTransient
-    public Collection<Rule> getRuleCollection() {
+    public List<Rule> getRuleCollection() {
         return ruleCollection;
     }
 
-    public void setRuleCollection(Collection<Rule> ruleCollection) {
+    public void setRuleCollection(List<Rule> ruleCollection) {
         this.ruleCollection = ruleCollection;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public SystemUser getUserId() {
-        return userId;
-    }
-
-    public void setUserId(SystemUser userId) {
-        this.userId = userId;
     }
 
     @Override
@@ -134,7 +106,8 @@ public class Card implements Serializable, ActivatableEntity, VisualizableEntity
             return false;
         }
         Card other = (Card) object;
-        if ((this.cardId == null && other.cardId != null) || (this.cardId != null && !this.cardId.equals(other.cardId))) {
+        if ((this.cardId == null && other.cardId != null) || 
+                (this.cardId != null && !this.cardId.equals(other.cardId))) {
             return false;
         }
         return true;

@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.apu.TcpServerForAccessControlDB.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +28,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author apu
@@ -39,6 +40,7 @@ import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;
 @Table(name = "rule")
 @XmlRootElement
 //@RedisHash("rule")
+@NoArgsConstructor
 @NamedQueries({
     @NamedQuery(name = "Rule.findAll", query = "SELECT r FROM Rule r")
     , @NamedQuery(name = "Rule.findByRuleId", query = "SELECT r FROM Rule r WHERE r.ruleId = :ruleId")
@@ -54,113 +56,60 @@ import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;
 public class Rule implements Serializable, ActivatableEntity {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "rule_id", nullable = false, unique = true)
+    @Getter @Setter
     private Integer ruleId;
+    
     @Column(name = "date_begin")
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Getter @Setter
     private Date dateBegin;
+    
     @Column(name = "date_end")
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Getter @Setter
     private Date dateEnd;
+    
     @Column(name = "active")
+    @Getter @Setter
     private Boolean active = false;
+    
     @JoinColumn(name = "card_id", referencedColumnName = "card_id")
     @ManyToOne(fetch = FetchType.LAZY)
+    @Getter @Setter
     private Card cardId;
+    
     @JoinColumn(name = "device_id", referencedColumnName = "device_id")
     @ManyToOne(fetch = FetchType.LAZY)
+    @Getter @Setter
     private Device deviceId;
+    
     @JoinColumn(name = "event_id", referencedColumnName = "event_id")
     @ManyToOne(fetch = FetchType.EAGER)
+    @Getter @Setter
     private EventType eventId;
+    
     @JoinColumn(name = "rule_type_id", referencedColumnName = "rule_type_id")
     @ManyToOne(fetch = FetchType.EAGER)
+    @Getter @Setter
     private RuleType ruleTypeId;
+    
     @OneToMany(mappedBy = "ruleId", fetch = FetchType.LAZY)
-    private Collection<EventMessage> eventMessageCollection;
+    private List<EventMessage> eventMessageCollection = new ArrayList<>();
 
-    public Rule() {
-    }
-
-    public Rule(Integer ruleId) {
-        this.ruleId = ruleId;
-    }
-
-    public Integer getRuleId() {
-        return ruleId;
-    }
-
-    public void setRuleId(Integer ruleId) {
-        this.ruleId = ruleId;
-    }
-
-    public Date getDateBegin() {
-        return dateBegin;
-    }
-
-    public void setDateBegin(Date dateBegin) {
-        this.dateBegin = dateBegin;
-    }
-
-    public Date getDateEnd() {
-        return dateEnd;
-    }
-
-    public void setDateEnd(Date dateEnd) {
-        this.dateEnd = dateEnd;
-    }
-    
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public Card getCardId() {
-        return cardId;
-    }
-
-    public void setCardId(Card cardId) {
-        this.cardId = cardId;
-    }
-
-    public Device getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(Device deviceId) {
-        this.deviceId = deviceId;
-    }
-    
-    public EventType getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(EventType eventId) {
-        this.eventId = eventId;
-    }
-
-    public RuleType getRuleTypeId() {
-        return ruleTypeId;
-    }
-
-    public void setRuleTypeId(RuleType ruleTypeId) {
-        this.ruleTypeId = ruleTypeId;
-    }
 
     @XmlTransient
-    public Collection<EventMessage> getEventMessageCollection() {
+    public List<EventMessage> getEventMessageCollection() {
         return eventMessageCollection;
     }
 
-    public void setEventMessageCollection(Collection<EventMessage> eventMessageCollection) {
+    public void setEventMessageCollection(List<EventMessage> eventMessageCollection) {
         this.eventMessageCollection = eventMessageCollection;
     }
 
@@ -178,7 +127,8 @@ public class Rule implements Serializable, ActivatableEntity {
             return false;
         }
         Rule other = (Rule) object;
-        if ((this.ruleId == null && other.ruleId != null) || (this.ruleId != null && !this.ruleId.equals(other.ruleId))) {
+        if ((this.ruleId == null && other.ruleId != null) || 
+                (this.ruleId != null && !this.ruleId.equals(other.ruleId))) {
             return false;
         }
         return true;

@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.apu.TcpServerForAccessControlDB.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +23,10 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;
 import com.apu.TcpServerForAccessControlDB.interfaces.VisualizableEntity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  *
  * @author apu
@@ -34,6 +35,7 @@ import com.apu.TcpServerForAccessControlDB.interfaces.VisualizableEntity;
 @Table(name = "device")
 @XmlRootElement
 //@RedisHash("device")
+@NoArgsConstructor
 @NamedQueries({
     @NamedQuery(name = "Device.findAll", query = "SELECT d FROM Device d")
     , @NamedQuery(name = "Device.findByDeviceId", query = "SELECT d FROM Device d WHERE d.deviceId = :deviceId")
@@ -43,98 +45,72 @@ import com.apu.TcpServerForAccessControlDB.interfaces.VisualizableEntity;
 public class Device implements Serializable, ActivatableEntity, VisualizableEntity {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "device_id", nullable = false, unique = true)
+    @Getter @Setter
     private Integer deviceId;
+    
     @Column(name = "device_number")
+    @Getter @Setter
     private Integer deviceNumber;
+    
     @Column(name = "last_packet_id")
+    @Getter @Setter
     private Integer lastPacketId = 0;
+    
     @Column(name = "active")
+    @Getter @Setter
     private Boolean active = false;
-    @OneToMany(mappedBy = "deviceId", fetch = FetchType.LAZY)
-    private Collection<AccessMessage> accessMessageCollection;
-    @OneToMany(mappedBy = "deviceId", fetch = FetchType.LAZY)
-    private Collection<Rule> ruleCollection;
-    @OneToMany(mappedBy = "deviceId", fetch = FetchType.LAZY)
-    private Collection<EventMessage> eventMessageCollection;
-    @OneToMany(mappedBy = "deviceId", fetch = FetchType.LAZY)
-    private Collection<InfoMessage> infoMessageCollection;
-
-    public Device() {
-    }
-
-    public Device(Integer deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public Integer getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(Integer deviceId) {
-        this.deviceId = deviceId;
-    }
     
-    public Integer getDeviceNumber() {
-        return deviceNumber;
-    }
-
-    public void setDeviceNumber(Integer deviceNumber) {
-        this.deviceNumber = deviceNumber;
-    }
-
-    public Integer getLastPacketId() {
-        return lastPacketId;
-    }
-
-    public void setLastPacketId(Integer lastPacketId) {
-        this.lastPacketId = lastPacketId;
-    }
+    @OneToMany(mappedBy = "deviceId", fetch = FetchType.LAZY)
+    private List<AccessMessage> accessMessageCollection = new ArrayList<>();
     
-    public Boolean getActive() {
-        return active;
-    }
+    @OneToMany(mappedBy = "deviceId", fetch = FetchType.LAZY)
+    private List<Rule> ruleCollection = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "deviceId", fetch = FetchType.LAZY)
+    private List<EventMessage> eventMessageCollection = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "deviceId", fetch = FetchType.LAZY)
+    private List<InfoMessage> infoMessageCollection = new ArrayList<>();
 
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
 
     @XmlTransient
-    public Collection<AccessMessage> getAccessMessageCollection() {
+    public List<AccessMessage> getAccessMessageCollection() {
         return accessMessageCollection;
     }
 
-    public void setAccessMessageCollection(Collection<AccessMessage> accessMessageCollection) {
+    public void setAccessMessageCollection(List<AccessMessage> accessMessageCollection) {
         this.accessMessageCollection = accessMessageCollection;
     }
 
     @XmlTransient
-    public Collection<Rule> getRuleCollection() {
+    public List<Rule> getRuleCollection() {
         return ruleCollection;
     }
 
-    public void setRuleCollection(Collection<Rule> ruleCollection) {
+    public void setRuleCollection(List<Rule> ruleCollection) {
         this.ruleCollection = ruleCollection;
     }
 
     @XmlTransient
-    public Collection<EventMessage> getEventMessageCollection() {
+    public List<EventMessage> getEventMessageCollection() {
         return eventMessageCollection;
     }
 
-    public void setEventMessageCollection(Collection<EventMessage> eventMessageCollection) {
+    public void setEventMessageCollection(List<EventMessage> eventMessageCollection) {
         this.eventMessageCollection = eventMessageCollection;
     }
 
     @XmlTransient
-    public Collection<InfoMessage> getInfoMessageCollection() {
+    public List<InfoMessage> getInfoMessageCollection() {
         return infoMessageCollection;
     }
 
-    public void setInfoMessageCollection(Collection<InfoMessage> infoMessageCollection) {
+    public void setInfoMessageCollection(List<InfoMessage> infoMessageCollection) {
         this.infoMessageCollection = infoMessageCollection;
     }
 
@@ -152,7 +128,8 @@ public class Device implements Serializable, ActivatableEntity, VisualizableEnti
             return false;
         }
         Device other = (Device) object;
-        if ((this.deviceId == null && other.deviceId != null) || (this.deviceId != null && !this.deviceId.equals(other.deviceId))) {
+        if ((this.deviceId == null && other.deviceId != null) || 
+                (this.deviceId != null && !this.deviceId.equals(other.deviceId))) {
             return false;
         }
         return true;
