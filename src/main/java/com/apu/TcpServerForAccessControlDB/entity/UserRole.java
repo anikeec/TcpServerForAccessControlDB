@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
@@ -52,7 +53,7 @@ public class UserRole implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "description")
-    @Getter @Setter
+    @NonNull @Getter @Setter    
     private String description;
     
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
