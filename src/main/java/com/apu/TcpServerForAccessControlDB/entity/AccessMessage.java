@@ -80,7 +80,14 @@ public class AccessMessage implements Serializable, AccessControlEntity {
     @OneToMany(mappedBy = "baseAccessMessId", fetch = FetchType.LAZY)
     private List<EventMessage> eventMessageCollection = new ArrayList<>();
 
-
+    public AccessMessage(Device deviceId, Card cardId, EventType eventId, Date date, String description) {
+                super();
+                this.description = description;
+                this.date = date;
+                this.cardId = cardId;
+                this.deviceId = deviceId;
+                this.eventId = eventId;
+    }
 
     @XmlTransient
     public List<EventMessage> getEventMessageCollection() {
