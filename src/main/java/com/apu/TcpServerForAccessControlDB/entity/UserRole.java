@@ -45,7 +45,7 @@ public class UserRole implements Serializable {
     @Basic(optional = false)
     @Column(name = "description")
     private String description;
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH })
     @JoinTable(
             name = "UserroleUser", 
             joinColumns = { @JoinColumn(name = "user_role_id") }, 
