@@ -28,7 +28,7 @@ import com.apu.TcpServerForAccessControlDB.interfaces.ActivatableEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -40,7 +40,7 @@ import lombok.Setter;
 @XmlRootElement
 //@RedisHash("systemUser")
 @JsonIgnoreProperties("cardCollection")
-@RequiredArgsConstructor
+@NoArgsConstructor
 @NamedQueries({
     @NamedQuery(name = "SystemUser.findAll", query = "SELECT u FROM SystemUser u")
     , @NamedQuery(name = "SystemUser.findByUserId", query = "SELECT u FROM SystemUser u WHERE u.userId = :userId")
