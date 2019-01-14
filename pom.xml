@@ -13,14 +13,14 @@
   <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.4.RELEASE</version>
-	<jdk.version>1.8</jdk.version> 
+        <version>2.0.4.RELEASE</version>	
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
+	<jdk.version>1.8</jdk.version> 
   </properties>
 
   <dependencies>
